@@ -4,9 +4,9 @@
 This plugin is inspired by a  [Quesiont on Stackoverflow](http://stackoverflow.com/questions/1675688) and allows to toggle displaying of space characters quickly.
 
 ###Installation
-Use the plugin manager of your choice. Or download the [stable][] version of the plugin, edit it with Vim (`vim show-white-XXX.vmb`) and simply source it (`:so %`). Restart and take a look at the help (`:h NrrwRgn.txt`)
+Use the plugin manager of your choice. Or download the [stable][] version of the plugin, edit it with Vim (`vim show-white-XXX.vmb`) and simply source it (`:so %`). Restart and take a look at the help (`:h ShowWhitespace.txt`)
 
-[stable]: http://www.vim.org/scripts/script.php?script_id=
+[stable]: http://www.vim.org/scripts/script.php?script_id=5043
 
 ###Usage
 Once installed, take a look at the help at `:h ShowWhitespace`
