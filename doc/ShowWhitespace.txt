@@ -27,6 +27,13 @@ WhiteSpace so that it is easily recognizable
 easily possible. It not configured otherwise, Spaces will be displayed using
 the '·' character.
 
+Note, it is possible, that not all spaces will be highlighted correctly. This
+seems to be - well - a particularity of the syntax highlighting used by Vim,
+that it skips syntax regions which have the skipwhite (|syn-skipwhite|) flag that.
+I posted a patch (https://groups.google.com/d/msg/vim_dev/sSkuUhSDX6o/fEWBkaseeoUJ)
+to fix this, so this might be fixed in the future. But until then, there is
+nothing this plugin can do to fix this.
+
                                                         *:ShowWhiteToggle*
 :ShowWhiteToggle  Toggle displaying Whitespace (highlights only Spaces, no 
                   Tabs or other whitespace characters!). The state of the 
