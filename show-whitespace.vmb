@@ -75,10 +75,10 @@ endfun
 fun! <sid>DefineWhiteSpace() "{{{1
     if w:showwhite_toggle
         exe 'syn match ShowWhite_WhiteSpace / / containedin=ALL conceal cchar='. s:ws
-        if !empty("s:ws_highlight")
+        if exists("s:ws_highlight") && !empty(s:ws_highlight)
             exe printf("hi Conceal %s", s:ws_highlight)
         endif
-    else
+    elseif hlexists('ShowWhite_WhiteSpace')
         syn clear ShowWhite_WhiteSpace
     endif
 endfu
@@ -122,7 +122,7 @@ endfun
 " Modeline {{{1
 " vim: ts=4 sts=4 fdm=marker com+=l\:\" fdl=0 et
 doc/ShowWhitespace.txt	[[[1
-109
+116
 *ShowWhitespace.txt*   A Plugin for displaying Whitespace
 
 Author:  Christian Brabandt <cb@256bit.org>
@@ -151,6 +151,13 @@ WhiteSpace so that it is easily recognizable
 (http://stackoverflow.com/questions/1675688). This plugin aims to make that
 easily possible. It not configured otherwise, Spaces will be displayed using
 the '·' character.
+
+Note, it is possible, that not all spaces will be highlighted correctly. This
+seems to be - well - a particularity of the syntax highlighting used by Vim,
+that it skips syntax regions which have the skipwhite (|syn-skipwhite|) flag that.
+I posted a patch (https://groups.google.com/d/msg/vim_dev/sSkuUhSDX6o/fEWBkaseeoUJ)
+to fix this, so this might be fixed in the future. But until then, there is
+nothing this plugin can do to fix this.
 
                                                         *:ShowWhiteToggle*
 :ShowWhiteToggle  Toggle displaying Whitespace (highlights only Spaces, no 

@@ -25,10 +25,10 @@ endfun
 fun! <sid>DefineWhiteSpace() "{{{1
     if w:showwhite_toggle
         exe 'syn match ShowWhite_WhiteSpace / / containedin=ALL conceal cchar='. s:ws
-        if !empty("s:ws_highlight")
+        if exists("s:ws_highlight") && !empty(s:ws_highlight)
             exe printf("hi Conceal %s", s:ws_highlight)
         endif
-    else
+    elseif hlexists('ShowWhite_WhiteSpace')
         syn clear ShowWhite_WhiteSpace
     endif
 endfu
