@@ -87,6 +87,25 @@ This interally modifies the Conceal highlighting, so it can have an influence
 on normal syntax highlighting rules.
 
 (default: Conceal)
+------------------------------------------------------------------------------
+
+If the default Conceal highlighting is too disturbing for the plugin can also
+link the Conceal highlighting group to the Normal (|hl-Normal|) or any other
+highlighting group you define.
+
+To do so, set the g:showwhite_highlighting_link variable like this
+(e.g. in your |.vimrc|): >
+
+    :let g:showwhite_highlighting_link = 'Normal'
+<
+Note: This only works, if the g:showwhite_highlighting variable is not set.
+
+If you do not want this, set the variable to the empty string like this (e.g.
+in your |.vimrc|): >
+
+    :let g:showwhite_highlighting_link = ''
+
+(default: Normal)
 =============================================================================
 3. ShowWhitespace Feedback                            *ShowWhitespace-feedback*
 
@@ -111,6 +130,7 @@ looking at my Amazon whishlist: http://www.amazon.de/wishlist/2BKAHE8J7Z6UW
 - Make sure highlighting group exists (issue
   https://github.com/chrisbra/vim-show-whitespace/issues/1, reported by
   feroxium, thanks!)
+- Link Conceal highlighting to Normal group
 
 0.1: Oct 26, 2014 {{{1
 

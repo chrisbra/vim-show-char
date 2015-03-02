@@ -47,7 +47,7 @@ let &cpo=s:cpo
 unlet s:cpo
 " vim: ts=4 sts=4 fdm=marker com+=l\:\" et
 autoload/showwhite.vim	[[[1
-73
+76
 " ShowWhite - Vim Plugin for displaying Whitespace
 " ------------------------------------------------
 " Version:     0.1
@@ -77,6 +77,8 @@ fun! <sid>DefineWhiteSpace() "{{{1
         exe 'syn match ShowWhite_WhiteSpace / / containedin=ALL conceal cchar='. s:ws
         if exists("s:ws_highlight") && !empty(s:ws_highlight)
             exe printf("hi Conceal %s", s:ws_highlight)
+        elseif exists("s:ws_highlight_link") && !empty(s:ws_highlight_link)
+            exe printf("hi! link Conceal %s", s:ws_highlight_link)
         endif
     elseif hlexists('ShowWhite_WhiteSpace')
         syn clear ShowWhite_WhiteSpace
@@ -106,6 +108,7 @@ fun! showwhite#Init() "{{{1
     endif
     let s:ws = get(g:, 'showwhite_space_char', '·')
     let s:ws_highlight = get(g:, 'showwhite_highlighting', '')
+    let s:ws_highlight_link = get(g:, 'showwhite_highlighting_link', 'Normal')
     let w:showwhite_toggle = get(w:, 'showwhite_toggle', 0)
     if has("conceal")
         if &l:cole != 2
@@ -122,27 +125,28 @@ endfun
 " Modeline {{{1
 " vim: ts=4 sts=4 fdm=marker com+=l\:\" fdl=0 et
 doc/ShowWhitespace.txt	[[[1
-116
+123
 *ShowWhitespace.txt*   A Plugin for displaying Whitespace
 
 Author:  Christian Brabandt <cb@256bit.org>
 Version: 0.1 Thu, 27 Mar 2014 23:16:27 +0100
 Copyright: (c) 2009-2014 by Christian Brabandt
-           The VIM LICENSE applies to ShowWhitespacePlugin.vim and ShowWhitespacePlugin.txt
-           (see |copyright|) except use ShowWhitespacePlugin instead of "Vim".
+           The VIM LICENSE applies to ShowWhitespacePlugin.vim and
+           ShowWhitespacePlugin.txt (see |copyright|) except use
+           ShowWhitespacePlugin instead of "Vim".
            NO WARRANTY, EXPRESS OR IMPLIED.  USE AT-YOUR-OWN-RISK.
 
 ==============================================================================
-1. Contents                                                      *ShowWhitespacePlugin*
+1. Contents                                               *ShowWhitespacePlugin*
 
-        1.  Contents............................................: |ShowWhitespacePlugin|
-        2.  ShowWhitespace Manual...............................: |ShowWhitespace-manual|
-        2.1 ShowWhitespace configuration........................: |ShowWhitespace-config|
-        3.  ShowWhitespace Feedback.............................: |ShowWhitespace-feedback|
-        4.  ShowWhitespace History..............................: |ShowWhitespace-history|
+    1.  Contents.......................................: |ShowWhitespacePlugin|
+    2.  ShowWhitespace Manual..........................: |ShowWhitespace-manual|
+    2.1 ShowWhitespace configuration...................: |ShowWhitespace-config|
+    3.  ShowWhitespace Feedback........................: |ShowWhitespace-feedback|
+    4.  ShowWhitespace History.........................: |ShowWhitespace-history|
 
 ==============================================================================
-2. ShowWhitespace Manual                                       *ShowWhitespace-manual*
+2. ShowWhitespace Manual                                  *ShowWhitespace-manual*
 
 Functionality
 
@@ -154,10 +158,11 @@ the '·' character.
 
 Note, it is possible, that not all spaces will be highlighted correctly. This
 seems to be - well - a particularity of the syntax highlighting used by Vim,
-that it skips syntax regions which have the skipwhite (|syn-skipwhite|) flag that.
-I posted a patch (https://groups.google.com/d/msg/vim_dev/sSkuUhSDX6o/fEWBkaseeoUJ)
-to fix this, so this might be fixed in the future. But until then, there is
-nothing this plugin can do to fix this.
+that it skips syntax regions which have the skipwhite (|syn-skipwhite|) flag
+set. I posted a patch to fix this, so this might be fixed in the future.
+But until then, there is nothing this plugin can do to fix this.
+The patch is available at:
+https://groups.google.com/d/msg/vim_dev/sSkuUhSDX6o/fEWBkaseeoUJ
 
                                                         *:ShowWhiteToggle*
 :ShowWhiteToggle  Toggle displaying Whitespace (highlights only Spaces, no 
@@ -229,6 +234,11 @@ looking at my Amazon whishlist: http://www.amazon.de/wishlist/2BKAHE8J7Z6UW
 
 =============================================================================
 4. ShowWhitespace History                              *ShowWhitespace-history*
+
+0.2: (unreleased) 
+- Make sure highlighting group exists (issue
+  https://github.com/chrisbra/vim-show-whitespace/issues/1, reported by
+  feroxium, thanks!)
 
 0.1: Oct 26, 2014 {{{1
 

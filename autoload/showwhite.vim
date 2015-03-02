@@ -27,6 +27,8 @@ fun! <sid>DefineWhiteSpace() "{{{1
         exe 'syn match ShowWhite_WhiteSpace / / containedin=ALL conceal cchar='. s:ws
         if exists("s:ws_highlight") && !empty(s:ws_highlight)
             exe printf("hi Conceal %s", s:ws_highlight)
+        elseif exists("s:ws_highlight_link") && !empty(s:ws_highlight_link)
+            exe printf("hi! link Conceal %s", s:ws_highlight_link)
         endif
     elseif hlexists('ShowWhite_WhiteSpace')
         syn clear ShowWhite_WhiteSpace
@@ -56,6 +58,7 @@ fun! showwhite#Init() "{{{1
     endif
     let s:ws = get(g:, 'showwhite_space_char', '·')
     let s:ws_highlight = get(g:, 'showwhite_highlighting', '')
+    let s:ws_highlight_link = get(g:, 'showwhite_highlighting_link', 'Normal')
     let w:showwhite_toggle = get(w:, 'showwhite_toggle', 0)
     if has("conceal")
         if &l:cole != 2
