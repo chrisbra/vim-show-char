@@ -4,7 +4,7 @@ DOC=$(wildcard doc/*.txt)
 PLUGIN=$(shell basename "$$PWD")
 VERSION=$(shell sed -n '/Version:/{s/^.*\(\S\.\S\+\)$$/\1/;p}' $(SCRIPT))
 
-.PHONY: $(PLUGIN).vmb README
+.PHONY: $(PLUGIN).vmb
 
 all: uninstall vimball install
 
@@ -26,15 +26,12 @@ uninstall:
 undo:
 	for i in */*.orig; do mv -f "$$i" "$${i%.*}"; done
 
-README:
-	cp -f $(DOC) README
-
 $(PLUGIN).vmb:
 	rm -f $(PLUGIN)-$(VERSION).vmb
 	vim -N -i NONE -u NONE -c 'ru! plugin/vimballPlugin.vim' -c ':call append("0", [ "$(SCRIPT)", "$(AUTOL)", "$(DOC)"])' -c '$$d' -c ":%MkVimball $(PLUGIN)-$(VERSION)  ." -c':q!'
 	ln -f $(PLUGIN)-$(VERSION).vmb $(PLUGIN).vmb
      
-release: version all README
+release: version all
 
 version:
 	perl -i.orig -pne 'if (/Version:/) {s/\.(\d*)/sprintf(".%d", 1+$$1)/e}' ${SCRIPT} ${AUTOL}

@@ -1,7 +1,7 @@
 *ShowWhitespace.txt*   A Plugin for displaying Whitespace
 
 Author:  Christian Brabandt <cb@256bit.org>
-Version: 0.1 Thu, 27 Mar 2014 23:16:27 +0100
+Version: 0.2 Tue, 21 Apr 2015 20:16:24 +0200
 Copyright: (c) 2009-2014 by Christian Brabandt
            The VIM LICENSE applies to ShowWhitespacePlugin.vim and
            ShowWhitespacePlugin.txt (see |copyright|) except use
@@ -35,6 +35,9 @@ set. I posted a patch to fix this, so this might be fixed in the future.
 But until then, there is nothing this plugin can do to fix this.
 The patch is available at:
 https://groups.google.com/d/msg/vim_dev/sSkuUhSDX6o/fEWBkaseeoUJ
+
+Note: Starting from Vim 7.4.711 a different patch has been included that makes
+use of the 'listchars' option to display whitespace characters.
 
                                                         *:ShowWhiteToggle*
 :ShowWhiteToggle  Toggle displaying Whitespace (highlights only Spaces, no 
@@ -86,6 +89,9 @@ Alternatively, you can define the variable g:showwhite_highlighting like this
 This interally modifies the Conceal highlighting, so it can have an influence
 on normal syntax highlighting rules.
 
+Note: Since starting from Vim 7.4.711 Vim supports highlighting whitespaces using
+the 'listchars' option, this option is not supported anymore
+
 (default: Conceal)
 ------------------------------------------------------------------------------
 
@@ -104,6 +110,9 @@ If you do not want this, set the variable to the empty string like this (e.g.
 in your |.vimrc|): >
 
     :let g:showwhite_highlighting_link = ''
+
+Note: Since starting from Vim 7.4.711 Vim supports highlighting whitespaces using
+the 'listchars' option, this option is not supported anymore
 
 (default: Normal)
 =============================================================================
@@ -126,11 +135,13 @@ looking at my Amazon whishlist: http://www.amazon.de/wishlist/2BKAHE8J7Z6UW
 =============================================================================
 4. ShowWhitespace History                              *ShowWhitespace-history*
 
-0.2: (unreleased) 
+0.2: Apr 21, 2015 {{{1
 - Make sure highlighting group exists (issue
   https://github.com/chrisbra/vim-show-whitespace/issues/1, reported by
   feroxium, thanks!)
 - Link Conceal highlighting to Normal group
+- Support Vim 7.4.711 (includes a native fix for whitespace highlighting using
+  the 'listchars' option)
 
 0.1: Oct 26, 2014 {{{1
 
