@@ -23,7 +23,7 @@ fun! <sid>WarningMsg(msg) "{{{1
 endfun
 
 fun! <sid>DefineWhiteSpace() "{{{1
-    if w:showwhite_toggle
+    if b:showwhite_toggle
         exe 'syn match ShowWhite_WhiteSpace / / containedin=ALL conceal cchar='. s:ws
         if exists("s:ws_highlight") && !empty(s:ws_highlight)
             exe printf("hi Conceal %s", s:ws_highlight)
@@ -58,7 +58,7 @@ fun! showwhite#Init() "{{{1
         call s:WarningMsg('ShowWhite works best with conceal feature')
     endif
     let s:ws_highlight = get(g:, 'showwhite_highlighting', '')
-    let w:showwhite_toggle = get(w:, 'showwhite_toggle', 0)
+    let b:showwhite_toggle = get(b:, 'showwhite_toggle', 0)
     let s:ws = get(g:, 'showwhite_space_char', '·')
     if !s:list_space
         " concealing not needed, Vim supports the space argument for the
@@ -73,9 +73,9 @@ fun! showwhite#Init() "{{{1
             endif
         endif
         call <sid>DefineWhiteSpace()
-        call <sid>DefineAugroups(w:showwhite_toggle)
+        call <sid>DefineAugroups(b:showwhite_toggle)
     else
-        if w:showwhite_toggle
+        if b:showwhite_toggle
             if &listchars !~# "space:."
                 exe printf("setl listchars+=space:%s",s:ws)
             endif
