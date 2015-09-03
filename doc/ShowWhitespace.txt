@@ -41,8 +41,7 @@ use of the 'listchars' option to display whitespace characters.
 
                                                         *:ShowWhiteToggle*
 :ShowWhiteToggle  Toggle displaying Whitespace (highlights only Spaces, no 
-                  Tabs or other whitespace characters!). The state of the 
-                  toggle function is remembered per window.
+                  Tabs or other whitespace characters!).
 
                                                          *ShowWhiteMapping*
 Mapping     Mode   Function~
@@ -142,6 +141,9 @@ looking at my Amazon whishlist: http://www.amazon.de/wishlist/2BKAHE8J7Z6UW
 - Link Conceal highlighting to Normal group
 - Support Vim 7.4.711 (includes a native fix for whitespace highlighting using
   the 'listchars' option)
+- Make toggle function buffer-local (PR
+  https://github.com/chrisbra/vim-show-whitespace/pull/3, by iliekturtles,
+  thanks!)
 
 0.1: Oct 26, 2014 {{{1
 
