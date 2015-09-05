@@ -1,7 +1,7 @@
 #ShowWhite plugin
 > A Vim plugin for displaying whitespace characters
 
-This plugin is inspired by a  [Quesiont on Stackoverflow](http://stackoverflow.com/questions/1675688) and allows to toggle displaying of space characters quickly.
+This plugin is inspired by a  [Question on Stackoverflow](http://stackoverflow.com/questions/1675688) and allows to toggle displaying of space characters quickly.
 
 ###Installation
 Use the plugin manager of your choice. Or download the [stable][] version of the plugin, edit it with Vim (`vim show-white-XXX.vmb`) and simply source it (`:so %`). Restart and take a look at the help (`:h ShowWhitespace.txt`)
