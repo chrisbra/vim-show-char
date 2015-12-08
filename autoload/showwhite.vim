@@ -10,6 +10,7 @@
 "               instead of "Vim". No warranty, express or implied.
 "               *** ***   Use At-Your-Own-Risk!   *** ***
 " GetLatestVimScripts:  5043 2 :AutoInstall: showwhite.vim
+let s:list = &list
 fun! <sid>WarningMsg(msg) "{{{1
     let msg = "ShowWhite: ". a:msg
     echohl WarningMsg
@@ -81,11 +82,13 @@ fun! showwhite#Init() "{{{1
             if &listchars !~# "space:."
                 exe printf("setl listchars+=space:%s",s:ws)
             endif
-            setl list
+            if !&list
+                setl list
+            endif
         else
             let space = matchstr(&listchars, 'space:.')
             exe ":setl listchars-=".space
-            set nolist
+            let &list = s:list
         endif
     endif
 endfun 
