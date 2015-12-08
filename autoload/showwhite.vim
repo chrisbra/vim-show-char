@@ -58,7 +58,9 @@ fun! showwhite#Init() "{{{1
         call s:WarningMsg('ShowWhite works best with conceal feature')
     endif
     let s:ws_highlight = get(g:, 'showwhite_highlighting', '')
-    let b:showwhite_toggle = get(b:, 'showwhite_toggle', 0)
+    " If Vim supports space arg for listchars option, have the toggle match on
+    " that setting, instead of tracking it ourselves.
+    let b:showwhite_toggle = s:list_space ? !(&list && match(&listchars, "space:.") > 0) : get(b:, 'showwhite_toggle', 0)
     let s:ws = get(g:, 'showwhite_space_char', '·')
     if !s:list_space
         " concealing not needed, Vim supports the space argument for the
