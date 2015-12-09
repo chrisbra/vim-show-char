@@ -19,7 +19,6 @@ set cpo&vim
 let g:loaded_showwhite = 1
 
 fu! <sid>ShowWhiteToggle()
-    let b:showwhite_toggle = !get(b:, 'showwhite_toggle', 0)
 	call showwhite#Init()
 endfu
 

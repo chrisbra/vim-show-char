@@ -10,7 +10,6 @@
 "               instead of "Vim". No warranty, express or implied.
 "               *** ***   Use At-Your-Own-Risk!   *** ***
 " GetLatestVimScripts:  5043 2 :AutoInstall: showwhite.vim
-let s:list = &list
 fun! <sid>WarningMsg(msg) "{{{1
     let msg = "ShowWhite: ". a:msg
     echohl WarningMsg
@@ -58,10 +57,21 @@ fun! showwhite#Init() "{{{1
     if !has("conceal") && !s:list_space
         call s:WarningMsg('ShowWhite works best with conceal feature')
     endif
-    let s:ws_highlight = get(g:, 'showwhite_highlighting', '')
     " If Vim supports space arg for listchars option, have the toggle match on
     " that setting, instead of tracking it ourselves.
-    let b:showwhite_toggle = s:list_space ? !(&list && match(&listchars, "space:.") > 0) : get(b:, 'showwhite_toggle', 0)
+    if !exists('b:showwhite_toggle') && s:list_space
+        let b:showwhite_toggle = !(&list && match(&listchars, "space:.")>0)
+        let s:list = &list
+    elseif !exists('b:showwhite_toggle')
+        let b:showwhite_toggle = 1
+    endif
+    let s:ws_highlight = get(g:, 'showwhite_highlighting', '')
+    "let b:showwhite_toggle = s:list_space ? !(&list && match(&listchars, "space:.") > 0) : get(b:, 'showwhite_toggle', 0)
+    let b:showwhite_toggle = get(b:, 'showwhite_toggle', 0)
+    if b:showwhite_toggle
+        " save as restore old list setting
+        let s:list = &list
+    endif
     let s:ws = get(g:, 'showwhite_space_char', '·')
     if !s:list_space
         " concealing not needed, Vim supports the space argument for the
@@ -91,6 +101,7 @@ fun! showwhite#Init() "{{{1
             let &list = s:list
         endif
     endif
+    let b:showwhite_toggle = !get(b:, 'showwhite_toggle', 0)
 endfun 
 
 " Modeline {{{1
