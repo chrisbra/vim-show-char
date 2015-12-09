@@ -55,7 +55,7 @@ fun! showwhite#Init() "{{{1
         call s:WarningMsg('ShowWhite needs Vim > 7.3 or it might not work correctly')
     endif
     let s:list_space = (v:version > 704 || (v:version == 704 && has("patch711")))
-    if !has("conceal")
+    if !has("conceal") && !s:list_space
         call s:WarningMsg('ShowWhite works best with conceal feature')
     endif
     let s:ws_highlight = get(g:, 'showwhite_highlighting', '')
