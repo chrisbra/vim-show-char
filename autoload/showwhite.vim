@@ -131,7 +131,9 @@ fun! showwhite#ShowCharAs(bang, arg) "{{{1
         call <sid>WarningMsg("'char2' can only be a single character")
         return
     endif
-    let w:showwhite_matches = []
+    if !exists("w:showwhite_matches")
+        let w:showwhite_matches = []
+    endif
     call add(w:showwhite_matches,  matchadd("Conceal", '\C\m'.args[0], 10, -1, {'conceal': args[1]}))
     if &conceallevel < 2
         setl conceallevel=2
