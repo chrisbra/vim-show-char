@@ -13,12 +13,14 @@ Once installed, take a look at the help at `:h ShowWhitespace`
 
 Here is a short overview of the functionality provided by the plugin:
 ####Ex commands:
-    :ShowWhiteToggle - Toggle displaying space characters in the current window.
+    :ShowWhiteToggle   - Toggle displaying space characters in the current window.
+    :ShowCharAs c1 c2  - Display c1 as c2 in the current window
+    :ShowCharAs!       - Remove highlighting from previous :ShowCharAs command
 ####Normal mode commands:
     \ws		 - toggle displaying space characters
 
 ###License & Copyright
 
-© 2014 by Christian Brabandt. The Vim License applies. See `:h license`
+© 2014-2017 by Christian Brabandt. The Vim License applies. See `:h license`
 
 __NO WARRANTY, EXPRESS OR IMPLIED.  USE AT-YOUR-OWN-RISK__

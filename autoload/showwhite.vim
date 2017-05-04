@@ -104,5 +104,43 @@ fun! showwhite#Init() "{{{1
     let b:showwhite_toggle = !get(b:, 'showwhite_toggle', 0)
 endfun 
 
+fun! showwhite#ShowCharAs(bang, arg) "{{{1
+    if v:version < 800
+        call <sid>WarningMsg("This command only works with Vim 8")
+        return
+    endif
+    if !has("conceal")
+        call <sid>WarningMsg("This command needs a Vim with +conceal support")
+        return
+    endif
+    if a:bang
+        for val in get(w:, 'showwhite_matches', [])
+            call matchdelete(val)
+        endfor
+        let w:showwhite_matches=[]
+        return
+    endif
+    let split_pat='''\?.''\?\zs\s\+\ze''\?.''\?'
+    if a:arg !~ split_pat
+        call <sid>WarningMsg("wrong arguments: :ShowCharAs 'char1' 'char2'")
+        return
+    endif
+    let args = split(a:arg, split_pat)
+    let args = map(args, {key, val -> substitute(val, '["'']', '', 'g')})
+    if len(split(args[1], '.\zs')) > 1
+        call <sid>WarningMsg("'char2' can only be a single character")
+        return
+    endif
+    let w:showwhite_matches = []
+    call add(w:showwhite_matches,  matchadd("Conceal", '\C\m'.args[0], 10, -1, {'conceal': args[1]}))
+    if &conceallevel < 2
+        setl conceallevel=2
+    endif
+    if &concealcursor !~ 'nv'
+        setl concealcursor=nv
+    endif
+endfunc
+
+
 " Modeline {{{1
 " vim: ts=4 sts=4 fdm=marker com+=l\:\" fdl=0 et

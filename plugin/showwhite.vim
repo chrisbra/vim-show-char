@@ -25,6 +25,7 @@ endfu
 " Public Interface: {{{1
 " Define the Command aliases "{{{2
 com! ShowWhiteToggle :call <sid>ShowWhiteToggle()
+com! -bang -nargs=* ShowCharAs :call showwhite#ShowCharAs(<bang>0, <q-args>)
 
 " Define the Mapping: "{{{2
 if !hasmapto('<Plug>ShowWhiteToggle')

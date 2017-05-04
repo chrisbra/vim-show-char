@@ -43,6 +43,14 @@ use of the 'listchars' option to display whitespace characters.
 :ShowWhiteToggle  Toggle displaying Whitespace (highlights only Spaces, no 
                   Tabs or other whitespace characters!).
 
+                                                        *:ShowCharAs*
+:ShowCharAs {char1} {char2}
+                  Highlight char1 in the current window as char2. This
+                  is done using the conceal feature. This needs Vim8.
+
+:ShowCharAs[!]    Remove any special highlighting done via previous
+                  |:ShowCharAs| command
+
                                                          *ShowWhiteMapping*
 Mapping     Mode   Function~
 -------     ----   --------
@@ -133,6 +141,9 @@ looking at my Amazon whishlist: http://www.amazon.de/wishlist/2BKAHE8J7Z6UW
 
 =============================================================================
 4. ShowWhitespace History                              *ShowWhitespace-history*
+
+0.3: May 04, 2017 {{{1
+- Add |:ShowCharAs| command
 
 0.2: Apr 21, 2015 {{{1
 - Make sure highlighting group exists (issue
