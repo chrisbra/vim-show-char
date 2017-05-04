@@ -6,7 +6,7 @@ VERSION=$(shell sed -n '/Version:/{s/^.*\(\S\.\S\+\)$$/\1/;p}' $(SCRIPT))
 
 .PHONY: $(PLUGIN).vmb
 
-all: uninstall vimball install
+#all: uninstall vimball install
 
 vimball: $(PLUGIN).vmb
 
